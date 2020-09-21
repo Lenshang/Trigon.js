@@ -11,10 +11,7 @@ export default class{
     addPattern(pattern,notes=null,offset=0){
         if(offset>0){
             for(var i=0;i<offset;i++){
-                this.data.push({
-                    synth:null,
-                    note:"0"
-                })
+                this.addNote(null,"0")
             }
         }
         if(pattern._name=="trigon_pattern"){
@@ -22,10 +19,7 @@ export default class{
         }
         else{
             notes.forEach(note=>{
-                this.data.push({
-                    synth:pattern,
-                    note:note
-                })
+                this.addNote(pattern,note)
             })
         }
     }
@@ -33,57 +27,36 @@ export default class{
     addNote(synth,note,hold,offset,args=null){
         if(offset>0){
             for(var i=0;i<offset;i++){
-                this.data.push({
-                    synth:null,
-                    note:"0"
-                })
+                this._addNote(null,"0")
             }
         }
+        this._addNote(synth,note,args);
+        if(hold>0){
+            for(var i=0;i<hold;i++){
+                this._addNote(null,"0")
+            }
+        }
+    }
+
+    _addNote(synth,note,args=null){
+        let _t=note.split("/");
+        var note_t=4;
+        if(_t.length>1){
+            note=_t[0];
+            note_t=parseInt(_t[1]);
+        }
+
         this.data.push({
             synth:synth,
             note:note,
             args:args
         })
-        if(hold>0){
-            for(var i=0;i<hold;i++){
-                this.data.push({
-                    synth:null,
-                    note:"0"
-                })
-            }
-        }
     }
 
     getLength(){
         return this.data.length;
     }
     play(step){
-        // var item=null;
-        // var _push=[]
-        // while(item=this.playedQueue.pop()){
-        //     if(!item.hold){
-        //         item.synth.stop();
-        //     }
-        // }
-        // let item=this.playedQueue.pop();
-        // if(item){
-        //     item.hold-=1;
-        //     debugger
-        //     if(item.hold<=0){
-        //         item.synth.stop();
-        //     }
-        //     else{
-        //         this.playedQueue.push(item);
-        //     }
-        // }
-        // let _q=this.playedQueue;
-        // _q.forEach(item=>{
-        //     item.hold-=1;
-        //     if(item.hold<=0){
-        //         this.playedQueue.splice(this.playedQueue.indexOf(item),1);
-        //         item.synth.stop();
-        //     }
-        // });
         if(step>=this.data.length){
             return false;
         }
