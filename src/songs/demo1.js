@@ -50,7 +50,7 @@ var setTrack1=function () {
     track1.addPattern(synth1_pattern)
     trigon.addTrack(track1);
 };
-setTrack1();
+
 
 //#endregion
 
@@ -81,7 +81,7 @@ var setTrack2 = function () {
     track2.addPattern(chord);
     trigon.addTrack(track2);
 }
-setTrack2();
+
 //#endregion
 
 //#region Track_synth3
@@ -107,7 +107,7 @@ var setTrack3 = function () {
     track3.addPattern(chord);
     trigon.addTrack(track3);
 }
-setTrack3();
+
 //#endregion
 
 //#region Track4_drum
@@ -126,7 +126,12 @@ var setTrack4=function(){
     track4.addPattern(chord);
     trigon.addTrack(track4);
 }
-setTrack4();
-//#endregion
 
+//#endregion
+trigon.setCreate(()=>{
+    setTrack1();
+    setTrack2();
+    setTrack3();
+    setTrack4();
+});
 export default trigon;

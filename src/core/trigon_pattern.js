@@ -1,5 +1,5 @@
-import Wad from 'web-audio-daw';
-
+//import Wad from 'web-audio-daw';
+import Wad from './wad/main';
 export default class{
     constructor(name=null){
         this.data=[];
@@ -14,6 +14,9 @@ export default class{
                 this.addNote(null,"0")
             }
         }
+        if(!pattern){
+            return;
+        }
         if(pattern._name=="trigon_pattern"){
             this.data=this.data.concat(pattern.data);
         }
@@ -23,7 +26,7 @@ export default class{
             })
         }
     }
-
+    
     addNote(synth,note,hold,offset,args=null){
         if(offset>0){
             for(var i=0;i<offset;i++){
@@ -37,7 +40,12 @@ export default class{
             }
         }
     }
-
+    addEvent(event){
+        this.data.push({
+            note:"_e",
+            event:event
+        })
+    }
     _addNote(synth,note,args=null){
         let _t=note.split("/");
         var note_t=4;
@@ -46,37 +54,70 @@ export default class{
             note_t=parseInt(_t[1]);
         }
 
-        this.data.push({
-            synth:synth,
-            note:note,
-            args:args
-        })
+        if(this.data.length>0&&this.data[this.data.length-1].note=="_e"){
+            let _data=this.data[this.data.length-1];
+            _data.note=note;
+            _data.synth=synth;
+            _data.args=args;
+        }
+        else{
+            this.data.push({
+                synth:synth,
+                note:note,
+                args:args
+            })
+        }
+
+        for(let i=1;i<note_t;i++){
+            this.data.push({
+                synth:null,
+                note:"-",
+                args:null
+            })
+        }
     }
 
-    getLength(){
-        return this.data.length;
-    }
     play(step){
-        if(step>=this.data.length){
+        var _data=this.data[step];
+        if(!_data){
             return false;
         }
-        let synth=this.data[step].synth;
-        let note=this.data[step].note;
-        let args=this.data[step].args;
-        if(note!="0"){
+        let synth=_data.synth;
+        let note=_data.note;
+        let args=_data.args;
+        if(_data.event){
+            _data.event(_data);
+        }
+
+        if(note!="0"&&note!="-"){
             if(this.stopOnNext&&this._lastSynth){
                 this._lastSynth.stop();
             }
-            if(args){
-                synth.play({pitch : note, label : note,...args})
+            let notes=note.split("+");
+            if(notes.length>1){
+                notes.forEach(_n=>{
+                    this._play(_n,synth,args);
+                });
             }
             else{
-                synth.play({pitch : note, label : note})
+                this._play(note,synth,args);
             }
+            
             
             this._lastSynth=synth;
             console.log("track:"+this.name+" play:"+note);
+            
         }
+
         return true;
+    }
+
+    _play(note,synth,args=null){
+        if(args){
+            synth.play({pitch : note, label : note,...args})
+        }
+        else{
+            synth.play({pitch : note, label : note})
+        }
     }
 }

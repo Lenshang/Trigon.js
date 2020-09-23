@@ -1,5 +1,7 @@
 import demo1 from './songs/demo1';
 import clannad from './songs/clannad';
+import performance_test from './songs/performance_test';
+import resserections from './songs/resserections';
 var trigon=null;
 document.getElementById("bt").onclick = function () {
     if(trigon==null){
@@ -25,7 +27,9 @@ document.getElementById("btPause").onclick = function () {
 
 var list=[
     {name:"demo1",song:demo1},
-    {name:"潮鸣り",song:clannad}
+    {name:"潮鸣り",song:clannad},
+    {name:"performance-test",song:performance_test},
+    {name:"Resserections",song:resserections}
 ]
 
 
@@ -35,17 +39,23 @@ dom_list.innerHTML="";
 
 for(let index=0;index<list.length;index++){
     let new_dom=document.createElement('a');
+    new_dom.setAttribute("name","song");
     new_dom.setAttribute("href","javascript:void(0);");
     let _index=index;
     new_dom.onclick=()=>{
+        document.querySelector("#control").innerHTML="";
         document.querySelector("h3").innerText=list[_index].name;
         trigon=list[_index].song;
+        if(list[_index].song.customDom){
+            list[_index].song.customDom();
+        }
     }
     new_dom.innerHTML=list[index].name;
     let new_li=document.createElement('li');
     new_li.appendChild(new_dom);
     dom_list.appendChild(new_li);
 }
-
-document.querySelector("h3").innerText=list[1].name;
-trigon=list[1].song;
+document.querySelectorAll("a[name='song']")[3].click();
+document.querySelector("#bt").click()
+// document.querySelector("h3").innerText=list[1].name;
+// trigon=list[1].song;

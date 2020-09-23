@@ -1,5 +1,5 @@
-import Wad from 'web-audio-daw';
-
+//import Wad from 'web-audio-daw';
+import Wad from './wad/main';
 export default class{
     constructor(){
         this._name="";
@@ -31,5 +31,8 @@ export default class{
                 this._play(note,args);
             }
         }
+    }
+    stop(args){
+        
     }
 }

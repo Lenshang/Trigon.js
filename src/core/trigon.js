@@ -1,4 +1,5 @@
-import Wad from 'web-audio-daw';
+//import Wad from 'web-audio-daw';
+import Wad from './wad/main';
 import Instrument from './trigon_instrument';
 var STATE={
     INIT:0,
@@ -17,6 +18,7 @@ export default class{
         this._skipFrame=60;
         this._stopMark=false;
         this._name="trigon";
+        this._create=null;
     }
 
     sine(args){
@@ -48,19 +50,35 @@ export default class{
         }
         return inst;
     }
+    groupSource(sounds,args){
+        let group = new Wad.Poly(args)
+        sounds.forEach(sound=>{
+            group.add(sound);
+        });
+        return group;
+    }
+
     addTrack(pattern){
         this.tracks.push(pattern)
     }
     setBpm(bpm){
         this.bpm=bpm;
-        this._skipFrame=Math.round(60*60/bpm/2)
+        this._skipFrame=Math.round(60*60/bpm/10)
         console.log(this._skipFrame)
+    }
+    setCreate(func){
+        this._create=func;
     }
     play(){
         if(this.state==STATE.INIT){
             this.stop();
         }
         if(this.state!=STATE.RUNNING){
+            this.tracks=[];
+            if(this._create){
+                this._create();
+            }
+            console.log("track-count:"+this.tracks.length);
             this._stopMark=false;
             this.state=STATE.RUNNING;
             requestAnimationFrame(()=>{
@@ -104,4 +122,5 @@ export default class{
         this._stopMark=true;
         this.state=STATE.STOP;
     }
+
 }

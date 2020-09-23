@@ -43,7 +43,6 @@ function setTrack1(){
     track1.addPattern(rythm1);
     track1.addPattern(rythm1);
 }
-setTrack1();
 //#endregion
 
 //#region piano_main
@@ -168,15 +167,6 @@ function setTrack2(){
         "D5","E5","C6","B5",
         "A5"
         ])
-    // section5.addNote(piano2,"D5");
-    // section5.addNote(piano2,"E5");
-    // section5.addNote(piano2,"G5");
-    // section5.addNote(piano2,"E5");
-    // section5.addNote(piano2,"D5");
-    // section5.addNote(piano2,"E5");
-    // section5.addNote(piano2,"G5");
-    // section5.addNote(piano2,"E5");
-
     let main=new Pattern();
     main.addPattern(section1);
     main.addPattern(section2);
@@ -190,7 +180,6 @@ function setTrack2(){
     track2.addPattern(preSection);
     track2.addPattern(main);
 }
-setTrack2();
 //#endregion
 
 //#region DrumKit
@@ -212,14 +201,25 @@ function setDrum(){
     pt2.addNote(drum,"snare+chh");
     pt2.addNote(drum,"chh");
     pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"kick+chh");
+    pt2.addNote(drum,"chh/2");
+    pt2.addNote(drum,"kick/2");
     pt2.addNote(drum,"snare+chh");
-    pt2.addNote(drum,"chh");
+    pt2.addNote(drum,"kick+chh");
+
+    let pt3=new Pattern();
+    pt3.addNote(drum,"kick+ohh");
+    pt3.addNote(drum,"chh");
+    pt3.addNote(drum,"snare+chh");
+    pt3.addNote(drum,"chh");
+    pt3.addNote(drum,"chh");
+    pt3.addNote(drum,"kick+chh");
+    pt3.addNote(drum,"snare+chh");
+    pt3.addNote(drum,"chh");
 
     let section1=new Pattern();
     section1.addPattern(pt1);
     section1.addPattern(pt2);
-    section1.addPattern(pt1);
+    section1.addPattern(pt3);
     section1.addPattern(pt1);
 
     let preSection=new Pattern();
@@ -235,7 +235,6 @@ function setDrum(){
     track3.addPattern(section1);
     track3.addPattern(section1);
 }
-setDrum();
 //#endregion
 
 //#region bass
@@ -260,7 +259,6 @@ function setTrackBass(){
     track4.addPattern(section);
     track4.addPattern(section);
 }
-setTrackBass();
 //#endregion
 
 //#region Synth
@@ -297,11 +295,36 @@ function setTrackSynth(){
     track5.addPattern(section);
     track5.addPattern(section);
 }
-setTrackSynth();
 //#endregion
-trigon.addTrack(track1);
-trigon.addTrack(track2);
-trigon.addTrack(track3);
-trigon.addTrack(track4);
-trigon.addTrack(track5);
+setTrack1();
+setTrack2();
+setDrum();
+setTrackSynth();
+setTrackBass();
+
+trigon.setCreate(()=>{
+    trigon.addTrack(track1);
+    trigon.addTrack(track2);
+    trigon.addTrack(track3);
+    trigon.addTrack(track4);
+    trigon.addTrack(track5);
+});
+trigon.customDom=()=>{
+    var dom=document.querySelector("#control");
+    dom.innerHTML="";
+    var label=document.createElement('span');
+    label.id="lbsp"
+    label.innerHTML="Speed(76):";
+    dom.appendChild(label);
+    var slider=document.createElement('input');
+    slider.setAttribute("min","30");
+    slider.setAttribute("max","120");
+    slider.setAttribute("type","range")
+    slider.setAttribute("value","76");
+    slider.onchange=ev=>{
+        trigon.setBpm(ev.target.value);
+        label.innerHTML="Speed("+ev.target.value+"):";
+    };
+    dom.appendChild(slider);
+}
 export default trigon;
