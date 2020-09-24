@@ -3,6 +3,17 @@ import clannad from './songs/clannad';
 import performance_test from './songs/performance_test';
 import resserections from './songs/resserections';
 var trigon=null;
+function getQueryVariable(variable)
+{
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+}
+
 document.getElementById("bt").onclick = function () {
     if(trigon==null){
         alert("Please select songs");
@@ -47,7 +58,7 @@ for(let index=0;index<list.length;index++){
         document.querySelector("h3").innerText=list[_index].name;
         trigon=list[_index].song;
         if(list[_index].song.customDom){
-            list[_index].song.customDom();
+            list[_index].song.customDom(document.querySelector("#control"));
         }
     }
     new_dom.innerHTML=list[index].name;
@@ -55,7 +66,12 @@ for(let index=0;index<list.length;index++){
     new_li.appendChild(new_dom);
     dom_list.appendChild(new_li);
 }
-document.querySelectorAll("a[name='song']")[3].click();
-document.querySelector("#bt").click()
+
+
+let urlparam=getQueryVariable("id");
+if(urlparam){
+    document.querySelectorAll("a[name='song']")[parseInt(urlparam)-1].click();
+}
+//document.querySelector("#bt").click()
 // document.querySelector("h3").innerText=list[1].name;
 // trigon=list[1].song;

@@ -113,11 +113,34 @@ export default class{
     }
 
     _play(note,synth,args=null){
+        [note,args]=this._parseNoteArg(note,args);
         if(args){
             synth.play({pitch : note, label : note,...args})
         }
         else{
             synth.play({pitch : note, label : note})
         }
+    }
+
+    _parseNoteArg(note,args){
+        if(note.indexOf("[")<=0||note.indexOf("]")<=0){
+            return [note,args];
+        }
+
+        if(!args){
+            args={}
+        }
+
+        note.match(/\[.*?\]/g).forEach(attr=>{
+            attr=attr.substr(1,attr.length-2)
+            let k=attr.split("=")[0];
+            let v=attr.split("=")[1];
+            if(k&&v){
+                args[k]=parseFloat(v);
+            }
+        });
+
+        note=note.split("[")[0];
+        return [note,args];
     }
 }

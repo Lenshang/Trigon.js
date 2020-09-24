@@ -14,6 +14,7 @@ var track1=new Pattern();
 var track2=new Pattern();
 var track2_2=new Pattern();
 var track3=new Pattern();
+var track3_2=new Pattern();
 var track4=new Pattern();
 //#region Track1(rynthm)
 var setTrack1=()=>{
@@ -21,7 +22,7 @@ var setTrack1=()=>{
     let delay = { delayTime: 0.8, wet: 0.25, feedback: 0.25 }
     let reverb={wet:0.7,impulse:"./samples/ir/Conic Long Echo Hall.wav"}
     let piano = trigon.square({ filter: { type: 'lowpass', frequency: 800, q: 1 }, env: env, delay: delay, volume: 0.15 })
-    let piano2 = trigon.square({ filter: { type: 'lowpass', frequency: 2000, q: 1 },env: { attack: 0.001, decay: 0, hold: 0.2, release: 0.15 }, delay: delay, volume: 0.2 })
+    let piano2 = trigon.square({ filter: { type: 'lowpass', frequency: 2000, q: 1 },env: { attack: 0.001, decay: 0, hold: 0.2, release: 0.15 }, delay: { delayTime: 0.8, wet: 0.5, feedback: 0.5 }, volume: 0.2 })
     let chord1=new Pattern();
     chord1.addPattern(piano,["A2","C3","E3","G#3","C4","E4","G#4","C5","E5"]);
     chord1.addPattern(piano,["0","0","0","0","0","0","0"]);
@@ -249,26 +250,132 @@ var setTrack2_2=()=>{
     track2_2.addPattern(null,[],126);
     track2_2.addPattern(piano,["A4/8"])
     track2_2.addPattern(piano,[
-        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","C5",
+        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","D5/2","C5/2",
         "B4/8","0/8","0/8","0/8","0/8","A4/8","B4/8","0/4","C5",
         "E4/8","0/8","0/8","0/8","0/8","0/8","0/8","0/8",
         "0/8","0/8","0/8","0/8","0/8","0/8","0/8","A4/8",
         
-        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","C5",
+        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","D5/2","C5/2",
         "B4/8","0/8","0/8","0/8","0/8","A4/8","B4/8","0/4","C5",
         "E4/8","0/8","0/8","0/8","0/8","0/8","0/8","0/8",
         "0/8","0/8","0/8","0/8","0/8","0/8","0/8","A4/8",
 
-        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","C5",
+        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","D5/2","C5/2",
         "B4/8","0/8","0/8","0/8","0/8","A4/8","B4/8","0/4","C5",
         "E4/8","0/8","0/8","0/8","0/8","0/8","0/8","0/8",
         "0/8","0/8","0/8","0/8","0/8","0/8","0/8","A4/8",
 
-        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","C5",
+        "E5/8","0/8","0/8","0/8","0/8","0/8","0/8","0/4","D5/2","C5/2",
         "B4/8","0/8","0/8","0/8","0/8","A4/8","B4/8","0/4","C5",
         "E4/8","0/8","0/8","0/8","0/8","0/8","0/8","0/8",
         "0/8","0/8","0/8","0/8","0/8","0/8","0/8","0/8"
-    ])
+    ]);
+
+    let piano3=piano;
+    let section2=new Pattern();
+    let chord1=new Pattern();
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+    chord1.addNote(piano3,"A3",1)
+    chord1.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+
+    let chord2=new Pattern();
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+    chord2.addNote(piano3,"G3",1)
+    chord2.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+
+    let chord2_2=new Pattern();
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"G4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"G4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+    chord2_2.addNote(piano3,"G3",1)
+    chord2_2.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+
+    let chord3=new Pattern();
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+    chord3.addNote(piano3,"F3",1)
+    chord3.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+
+    let chord4=new Pattern();
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"G#4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"A4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"B4[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+    chord4.addNote(piano3,"E3",1)
+    chord4.addNote(piano3,"C5[panning=.5]+E4[panning=-.5]",1)
+
+    section2.addPattern(chord1);
+    section2.addPattern(chord2);
+    section2.addPattern(chord3);
+    section2.addPattern(chord4);
+    section2.addPattern(chord1);
+    section2.addPattern(chord2_2);
+    section2.addPattern(chord3);
+    section2.addPattern(chord4);
+    track2_2.addPattern(section2);
+    track2_2.addPattern(chord1);
+    track2_2.addPattern(chord2_2);
+    track2_2.addPattern(chord3);
+    track2_2.addPattern(chord4);
 }
 setTrack2_2();
 //#endregion
@@ -300,66 +407,102 @@ var setTrack3=()=>{
     track3.addPattern(section1);
     track3.addPattern(section1);
     track3.addPattern(null,[],128);
+    track3.addPattern(null,[],128);
+    track3.addPattern(section1);
+    track3.addPattern(section1);
+    track3.addPattern(section1);
 }
 setTrack3();
+//#endregion
+
+//#region track3_2(bass2)
+var setTrack3_2=()=>{
+    track3_2.stopOnNext=true;
+    let env = { attack: 0.01, decay: 0.03, hold: 2, release: 0 }
+    let bass1 = trigon.sawtooth({ env: env, volume: 0.1,panning:0.5 })
+    let bass2 = trigon.sawtooth({ env: env, volume: 0.1,detune:30,panning:-0.5 })
+    let bass = trigon.groupSource([bass1,bass2],{volume:1,filter: { type: 'lowpass', frequency: 2000, q: 1 }})
+    let section1=new Pattern();
+    section1.addNote(bass,"A2",7);
+    section1.addNote(bass,"A2",7);
+    section1.addNote(bass,"A2",7);
+    section1.addNote(bass,"A2",7);
+    section1.addNote(bass,"G2",7);
+    section1.addNote(bass,"G2",7);
+    section1.addNote(bass,"G2",7);
+    section1.addNote(bass,"G2",7);
+    section1.addNote(bass,"F2",7);
+    section1.addNote(bass,"F2",7);
+    section1.addNote(bass,"F2",7);
+    section1.addNote(bass,"F2",7);
+    section1.addNote(bass,"E2",7);
+    section1.addNote(bass,"E2",7);
+    section1.addNote(bass,"E2",7);
+    section1.addNote(bass,"E2",7);
+    track3_2.addPattern(null,[],128*6);
+    track3_2.addPattern(section1);
+    track3_2.addPattern(section1);
+    track3_2.addPattern(section1);
+}
+setTrack3_2();
 //#endregion
 
 //#region track4(drum)
 var setTrack4=()=>{
     let drum = trigon.baseDrum({volume:0.8});
     let pt1=new Pattern();
-    pt1.addNote(drum,"kick+ohh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"snare+chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"kick+chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"kick+chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"snare+chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
-    pt1.addNote(drum,"chh");
+    pt1.addNote(drum,"kick+ohh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"snare+chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"kick+chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"kick+chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"snare+chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
+    pt1.addNote(drum,"chh3");
 
     let pt2=new Pattern();
-    pt2.addNote(drum,"kick+chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"snare+chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"chh");
+    pt2.addNote(drum,"kick+chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"snare+chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"chh3");
     pt2.addNote(drum,"kick");
-    pt2.addNote(drum,"snare+chh");
-    pt2.addNote(drum,"chh");
-    pt2.addNote(drum,"kick+chh");
-    pt2.addNote(drum,"chh");
+    pt2.addNote(drum,"snare+chh3");
+    pt2.addNote(drum,"chh3");
+    pt2.addNote(drum,"kick+chh3");
+    pt2.addNote(drum,"chh3");
 
     let pt3=new Pattern();
-    pt3.addNote(drum,"kick+ohh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"snare+chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"kick+chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"snare+chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
-    pt3.addNote(drum,"chh");
+    pt3.addNote(drum,"kick+ohh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"snare+chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"kick+chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"snare+chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
+    pt3.addNote(drum,"chh3");
 
     let section1=new Pattern();
     section1.addPattern(pt1);
@@ -375,6 +518,12 @@ var setTrack4=()=>{
     track4.addPattern(section1);
     track4.addPattern(section1);
     track4.addPattern(section1);
+    track4.addPattern(section1);
+    track4.addPattern(section1);
+    track4.addPattern(section1);
+    track4.addPattern(section1);
+    track4.addPattern(section1);
+    track4.addPattern(section1);
 }
 setTrack4();
 //#endregion
@@ -383,7 +532,13 @@ trigon.setCreate(()=>{
     trigon.addTrack(track2);
     trigon.addTrack(track2_2);
     trigon.addTrack(track3);
+    trigon.addTrack(track3_2);
     trigon.addTrack(track4);
 });
-
+trigon.customDom=(dom)=>{
+    var img=document.createElement('img');
+    img.setAttribute("src","./images/resserections.jpg");
+    img.setAttribute("width","350px");
+    dom.appendChild(img);
+}
 export default trigon

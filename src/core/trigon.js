@@ -39,7 +39,10 @@ export default class{
             "kick":new Wad({source : './samples/drum/kick.wav',...args}),
             "snare":new Wad({source : './samples/drum/snare.wav',...args}),
             "ohh":new Wad({source : './samples/drum/openhh.wav',...args}),
+            "ohh3":new Wad({source : './samples/drum/openhh3.wav',...args}),
             "chh":new Wad({source : './samples/drum/closehh.wav',...args}),
+            "chh2":new Wad({source : './samples/drum/closehh2.wav',...args}),
+            "chh3":new Wad({source : './samples/drum/closehh3.wav',...args}),
         }
         inst.setMap(map);
         inst.onTrigger=args=>{
@@ -64,7 +67,7 @@ export default class{
     setBpm(bpm){
         this.bpm=bpm;
         this._skipFrame=Math.round(60*60/bpm/10)
-        console.log(this._skipFrame)
+        console.log("skipFrame:"+this._skipFrame)
     }
     setCreate(func){
         this._create=func;
