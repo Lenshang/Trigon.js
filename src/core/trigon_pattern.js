@@ -1,12 +1,13 @@
 //import Wad from 'web-audio-daw';
 import Wad from './wad/main';
 export default class{
-    constructor(name=null){
+    constructor(name=null,defaultNoteLength=4){
         this.data=[];
         this._name="trigon_pattern";
         this._lastSynth=null;
         this.name=name;
         this.stopOnNext=false;
+        this.defaultNoteLength=defaultNoteLength;
     }
     addPattern(pattern,notes=null,offset=0){
         if(offset>0){
@@ -48,7 +49,7 @@ export default class{
     }
     _addNote(synth,note,args=null){
         let _t=note.split("/");
-        var note_t=4;
+        var note_t=this.defaultNoteLength;
         if(_t.length>1){
             note=_t[0];
             note_t=parseInt(_t[1]);

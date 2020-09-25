@@ -2,6 +2,7 @@ import demo1 from './songs/demo1';
 import clannad from './songs/clannad';
 import performance_test from './songs/performance_test';
 import resserections from './songs/resserections';
+import LiYue from './songs/liyue';
 var trigon=null;
 function getQueryVariable(variable)
 {
@@ -37,10 +38,10 @@ document.getElementById("btPause").onclick = function () {
 }
 
 var list=[
-    {name:"demo1",song:demo1},
-    {name:"潮鸣り",song:clannad},
-    {name:"performance-test",song:performance_test},
-    {name:"Resserections",song:resserections}
+    // {name:"demo1",song:demo1},
+    {name:"潮鸣り - 折戸伸治",song:new clannad()},
+    {name:"Resserections - Lena Raine",song:new resserections()},
+    {name:"黎月BGM - HoyoMix",song:new LiYue()}
 ]
 
 
@@ -56,9 +57,11 @@ for(let index=0;index<list.length;index++){
     new_dom.onclick=()=>{
         document.querySelector("#control").innerHTML="";
         document.querySelector("h3").innerText=list[_index].name;
-        trigon=list[_index].song;
-        if(list[_index].song.customDom){
-            list[_index].song.customDom(document.querySelector("#control"));
+        var song=list[_index].song;
+        song.create();
+        trigon=song.trigon;
+        if(song.customDom){
+            song.customDom(document.querySelector("#control"));
         }
     }
     new_dom.innerHTML=list[index].name;
@@ -72,6 +75,8 @@ let urlparam=getQueryVariable("id");
 if(urlparam){
     document.querySelectorAll("a[name='song']")[parseInt(urlparam)-1].click();
 }
+
+document.querySelectorAll("a[name='song']")[2].click();
 //document.querySelector("#bt").click()
 // document.querySelector("h3").innerText=list[1].name;
 // trigon=list[1].song;

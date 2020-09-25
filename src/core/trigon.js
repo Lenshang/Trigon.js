@@ -19,6 +19,7 @@ export default class{
         this._stopMark=false;
         this._name="trigon";
         this._create=null;
+        this.speed=1;
     }
 
     sine(args){
@@ -66,7 +67,7 @@ export default class{
     }
     setBpm(bpm){
         this.bpm=bpm;
-        this._skipFrame=Math.round(60*60/bpm/10)
+        this._skipFrame=Math.round(60*60/bpm/10*2/this.speed)
         console.log("skipFrame:"+this._skipFrame)
     }
     setCreate(func){
