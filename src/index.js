@@ -76,7 +76,7 @@ if(urlparam){
     document.querySelectorAll("a[name='song']")[parseInt(urlparam)-1].click();
 }
 
-document.querySelectorAll("a[name='song']")[2].click();
+//document.querySelectorAll("a[name='song']")[2].click();
 //document.querySelector("#bt").click()
 // document.querySelector("h3").innerText=list[1].name;
 // trigon=list[1].song;

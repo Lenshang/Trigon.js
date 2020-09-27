@@ -19,7 +19,18 @@ export default class{
             return;
         }
         if(pattern._name=="trigon_pattern"){
-            this.data=this.data.concat(pattern.data);
+            if(pattern.stopOnNext==true){
+                this.data=this.data.concat(pattern.data.map(item=>{
+                    if(item.args==null){
+                        item.args={}
+                    }
+                    item.args["_stop"]=true
+                    return item;
+                }));
+            }
+            else{
+                this.data=this.data.concat(pattern.data);
+            }
         }
         else{
             notes.forEach(note=>{
@@ -91,8 +102,8 @@ export default class{
         }
 
         if(note!="0"&&note!="-"){
-            if(this.stopOnNext&&this._lastSynth){
-                this._lastSynth.stop();
+            if(this.stopOnNext||(this._lastSynth&&this._lastSynth.stop)){
+                this._lastSynth.synth.stop();
             }
             let notes=note.split("+");
             if(notes.length>1){
@@ -104,12 +115,11 @@ export default class{
                 this._play(note,synth,args);
             }
             
-            
-            this._lastSynth=synth;
+
+            //this._lastSynth=synth;
             console.log("track:"+this.name+" play:"+note);
             
         }
-
         return true;
     }
 
@@ -120,6 +130,13 @@ export default class{
         }
         else{
             synth.play({pitch : note, label : note})
+        }
+
+        if(args&&args["_stop"]){
+            this._lastSynth={synth:synth,stop:true};
+        }
+        else{
+            this._lastSynth={synth:synth,stop:false};
         }
     }
 
@@ -136,7 +153,10 @@ export default class{
             attr=attr.substr(1,attr.length-2)
             let k=attr.split("=")[0];
             let v=attr.split("=")[1];
-            if(k&&v){
+            if(k=="stop"){
+                args["_stop"]=true;
+            }
+            else if(k&&v){
                 args[k]=parseFloat(v);
             }
         });
