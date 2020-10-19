@@ -20,6 +20,7 @@ export default class{
         this._name="trigon";
         this._create=null;
         this.speed=1;
+        this.pitchShift=0;
     }
 
     sine(args){
@@ -63,8 +64,19 @@ export default class{
     }
 
     addTrack(pattern){
+        if(this.pitchShift!=0){
+            pattern.pitchShift=this.pitchShift;
+        }
         this.tracks.push(pattern)
     }
+
+    setPitchShift(p){
+        this.tracks.forEach(t=>{
+            t.pitchShift=p;
+        });
+        this.pitchShift=p;
+    }
+
     setBpm(bpm){
         this.bpm=bpm;
         this._skipFrame=Math.round(60*60/bpm/10*2/this.speed)

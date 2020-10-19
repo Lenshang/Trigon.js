@@ -531,6 +531,7 @@ export default class{
             track4.addPattern(section1);
         }
         setTrack4();
+        // this.trigon.setPitchShift(-999)
         //#endregion
         this.trigon.setCreate(()=>{
             this.trigon.addTrack(track1);

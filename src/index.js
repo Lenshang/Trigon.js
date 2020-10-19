@@ -39,9 +39,9 @@ document.getElementById("btPause").onclick = function () {
 
 var list=[
     // {name:"demo1",song:demo1},
-    {name:"潮鸣り - 折戸伸治",song:new clannad()},
-    {name:"Resserections - Lena Raine",song:new resserections()},
-    {name:"黎月BGM - HoyoMix",song:new LiYue()}
+    {name:"潮鸣り - 折戸伸治",song:clannad},
+    {name:"Resserections - Lena Raine",song:resserections},
+    {name:"黎月BGM - HoyoMix",song:LiYue}
 ]
 
 
@@ -57,7 +57,7 @@ for(let index=0;index<list.length;index++){
     new_dom.onclick=()=>{
         document.querySelector("#control").innerHTML="";
         document.querySelector("h3").innerText=list[_index].name;
-        var song=list[_index].song;
+        var song=new list[_index].song;
         song.create();
         trigon=song.trigon;
         if(song.customDom){

@@ -1,13 +1,15 @@
 //import Wad from 'web-audio-daw';
 import Wad from './wad/main';
+import {notePitchShift} from './utils';
 export default class{
-    constructor(name=null,defaultNoteLength=4){
+    constructor(name=null,defaultNoteLength=4,pitchShift=0){
         this.data=[];
         this._name="trigon_pattern";
         this._lastSynth=null;
         this.name=name;
         this.stopOnNext=false;
         this.defaultNoteLength=defaultNoteLength;
+        this.pitchShift=pitchShift;
     }
     addPattern(pattern,notes=null,offset=0){
         if(offset>0){
@@ -102,7 +104,7 @@ export default class{
         }
 
         if(note!="0"&&note!="-"){
-            if(this.stopOnNext||(this._lastSynth&&this._lastSynth.stop)){
+            if(this._lastSynth&&(this.stopOnNext||this._lastSynth.stop)){
                 this._lastSynth.synth.stop();
             }
             let notes=note.split("+");
@@ -125,6 +127,11 @@ export default class{
 
     _play(note,synth,args=null){
         [note,args]=this._parseNoteArg(note,args);
+
+        if(this.pitchShift!=0){
+            note=notePitchShift(note,this.pitchShift)
+        }
+
         if(args){
             synth.play({pitch : note, label : note,...args})
         }

@@ -14,11 +14,7 @@ export default class{
         this.track1=new Pattern("track1",4);
         this.track2=new Pattern("track2",4);
         this.track3=new Pattern("track3",4);
-        this.trigon.setCreate(()=>{
-            this.trigon.addTrack(this.track1);
-            this.trigon.addTrack(this.track2);
-            this.trigon.addTrack(this.track3);
-        });
+
     }
     setTrack1(){
         let env = { attack: 0, decay: 0.01, hold: 0.2, release: 0.3 }
@@ -104,5 +100,13 @@ export default class{
         this.setTrack1();
         this.setTrack2();
         this.setTrack3();
+        // this.track1.pitchShift=-12;
+        // this.track2.pitchShift=-12;
+        // this.track3.pitchShift=-12;
+        this.trigon.setCreate(()=>{
+            this.trigon.addTrack(this.track1);
+            this.trigon.addTrack(this.track2);
+            this.trigon.addTrack(this.track3);
+        });
     }
 }
