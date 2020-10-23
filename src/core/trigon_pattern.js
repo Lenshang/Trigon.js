@@ -107,6 +107,9 @@ export default class{
             if(this._lastSynth&&(this.stopOnNext||this._lastSynth.stop)){
                 this._lastSynth.synth.stop();
             }
+            if(note=="m"||note=="M"){
+                return true;
+            }
             let notes=note.split("+");
             if(notes.length>1){
                 notes.forEach(_n=>{

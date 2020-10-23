@@ -3,6 +3,7 @@ import clannad from './songs/clannad';
 import performance_test from './songs/performance_test';
 import resserections from './songs/resserections';
 import LiYue from './songs/liyue';
+import LiYue2 from './songs/liyue2';
 var trigon=null;
 function getQueryVariable(variable)
 {
@@ -41,7 +42,8 @@ var list=[
     // {name:"demo1",song:demo1},
     {name:"潮鸣り - 折戸伸治",song:clannad},
     {name:"Resserections - Lena Raine",song:resserections},
-    {name:"黎月BGM - HoyoMix",song:LiYue}
+    {name:"黎月BGM - HoyoMix",song:LiYue},
+    {name:"黎月BGM2 - HoyoMix",song:LiYue2}
 ]
 
 
@@ -57,7 +59,7 @@ for(let index=0;index<list.length;index++){
     new_dom.onclick=()=>{
         document.querySelector("#control").innerHTML="";
         document.querySelector("h3").innerText=list[_index].name;
-        var song=new list[_index].song;
+        var song=new list[_index].song();
         song.create();
         trigon=song.trigon;
         if(song.customDom){
