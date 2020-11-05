@@ -4,6 +4,7 @@ import performance_test from './songs/performance_test';
 import resserections from './songs/resserections';
 import LiYue from './songs/liyue';
 import LiYue2 from './songs/liyue2';
+import XiaoYeZi from './songs/xiaoyezi';
 var trigon=null;
 function getQueryVariable(variable)
 {
@@ -43,7 +44,8 @@ var list=[
     {name:"潮鸣り - 折戸伸治",song:clannad},
     {name:"Resserections - Lena Raine",song:resserections},
     {name:"黎月BGM - HoyoMix",song:LiYue},
-    {name:"黎月BGM2 - HoyoMix",song:LiYue2}
+    {name:"黎月BGM2 - HoyoMix",song:LiYue2},
+    {name:"小夜子 - みきとP",song:XiaoYeZi}
 ]
 
 
