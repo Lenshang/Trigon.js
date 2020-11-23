@@ -104,13 +104,24 @@ export default class{
         }
 
         if(note!="0"&&note!="-"){
-            if(this._lastSynth&&(this.stopOnNext||this._lastSynth.stop)){
-                this._lastSynth.synth.stop();
+            if(this._lastSynth&&this._lastSynth.length>0){
+                // if(this._lastSynth.length==2){
+                //     if(this._lastSynth[0].note=="A#3"&&this._lastSynth[1].note=="F#2"){
+                //         debugger
+                //     }
+                // }
+                this._lastSynth.forEach(syn=>{
+                    if(this.stopOnNext||syn.stop){
+                        syn.synth.stop();
+                    }
+                })
+                //this._lastSynth.synth.stop();
             }
             if(note=="m"||note=="M"){
                 return true;
             }
             let notes=note.split("+");
+            this._lastSynth=[];
             if(notes.length>1){
                 notes.forEach(_n=>{
                     this._play(_n,synth,args);
@@ -143,10 +154,12 @@ export default class{
         }
 
         if(args&&args["_stop"]){
-            this._lastSynth={synth:synth,stop:true};
+            this._lastSynth.push({synth:synth,stop:true,note:note})
+            //this._lastSynth={synth:synth,stop:true};
         }
         else{
-            this._lastSynth={synth:synth,stop:false};
+            this._lastSynth.push({synth:synth,stop:false,note:note});
+            //this._lastSynth={synth:synth,stop:false};
         }
     }
 
