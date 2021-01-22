@@ -6,6 +6,7 @@ import LiYue from './songs/liyue';
 import LiYue2 from './songs/liyue2';
 import XiaoYeZi from './songs/xiaoyezi';
 import Starcrossed from './songs/starcrossed';
+import BreakDown from "./songs/breakdown";
 var trigon=null;
 function getQueryVariable(variable)
 {
@@ -47,7 +48,8 @@ var list=[
     {name:"黎月BGM - HoyoMix",song:LiYue},
     {name:"黎月BGM2 - HoyoMix",song:LiYue2},
     {name:"小夜子 - みきとP",song:XiaoYeZi},
-    {name:"Starcrossed(TsuBaKi) - 连殇 ft. 贼恩",song:Starcrossed}
+    {name:"Starcrossed(TsuBaKi) - 连殇 ft. 贼恩",song:Starcrossed},
+    {name:"BreakDown",song:BreakDown}
 ]
 
 

@@ -33,6 +33,8 @@ export default class{
         }
     }
     stop(args){
-        
+        for(let syn in this.map){
+            this.map[syn].stop();
+        }
     }
 }

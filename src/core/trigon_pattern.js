@@ -10,6 +10,8 @@ export default class{
         this.stopOnNext=false;
         this.defaultNoteLength=defaultNoteLength;
         this.pitchShift=pitchShift;
+
+        this.onplay=null;
     }
     addPattern(pattern,notes=null,offset=0){
         if(offset>0){
@@ -133,8 +135,10 @@ export default class{
             
 
             //this._lastSynth=synth;
-            console.log("track:"+this.name+" play:"+note);
-            
+            //console.log("track:"+this.name+" play:"+note);
+            if(this.onplay){
+                this.onplay(this.name,note);
+            }
         }
         return true;
     }
@@ -152,7 +156,6 @@ export default class{
         else{
             synth.play({pitch : note, label : note})
         }
-
         if(args&&args["_stop"]){
             this._lastSynth.push({synth:synth,stop:true,note:note})
             //this._lastSynth={synth:synth,stop:true};

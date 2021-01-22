@@ -55,6 +55,25 @@ export default class{
         }
         return inst;
     }
+    metalCoreDrum(args){
+        var inst=new Instrument();
+        var map={
+            "kick":new Wad({source : './samples/metalcoredrum/kick.wav',...args}),
+            "snare":new Wad({source : './samples/metalcoredrum/snare.wav',...args}),
+            "snare2":new Wad({source : './samples/metalcoredrum/snare2.wav',...args}),
+            "crash":new Wad({source : './samples/metalcoredrum/crash.wav',...args}),
+            "crash2":new Wad({source : './samples/metalcoredrum/crash2.wav',...args}),
+            "hihat":new Wad({source : './samples/metalcoredrum/hihat.wav',...args}),
+        }
+        inst.setMap(map);
+        inst.onTrigger=args=>{
+            var notes=args["pitch"].split("+");
+            notes.forEach(note=>{
+                inst._play(note,args);
+            });
+        }
+        return inst;
+    }
     groupSource(sounds,args){
         let group = new Wad.Poly(args)
         sounds.forEach(sound=>{
@@ -101,6 +120,11 @@ export default class{
                 this._onFrame();
             })
         }
+    }
+    setOnPlay(func){
+        this.tracks.forEach(track=>{
+            track.onplay=func;
+        });
     }
     _onFrame(){
         if(!this._stopMark){

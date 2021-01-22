@@ -4,6 +4,7 @@
   "description": "",
   "main": "song.js",
   "dependencies": {
+    "html-webpack-plugin": "^4.5.1",
     "web-audio-daw": "^4.9.1"
   },
   "devDependencies": {
